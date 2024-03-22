@@ -33,6 +33,8 @@ class TodoController extends GetxController{
   void addNote(String title, String notes){
     titleNotes['title']=title;
     titleNotes['notes']=notes;
+    
+    
     print(titleNotes);
   }
 }
