@@ -1,11 +1,11 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/screens/HomePage.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -13,10 +13,11 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    super.initState();
     Timer(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
       () {
-        Get.to(MyHomePage());
+        Get.off(() => const MyHomePage());
       },
     );
   }
@@ -39,16 +40,16 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     TextSpan(text: 'What '),
                     TextSpan(
-                        text: 'TODO?',
-                        style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red))
+                      text: 'TODO?',
+                      style: TextStyle(
+                        fontSize: 60,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
+                    )
                   ]),
             ),
-            Container(
-              child: Image.asset('assets/images/image.png'),
-            )
+            Image.asset('assets/images/image.png')
           ],
         ),
       ),

@@ -1,40 +1,40 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 
-class TodoController extends GetxController{
+import '../model/Notes.dart';
 
-  final taskName=TextEditingController();
-  RxList tasksList=[].obs;
+class TodoController extends GetxController {
+  late String taskName;
 
-  final notes=TextEditingController();
-  Map<String,String> titleNotes={
-    'title' : '',
-    'notes' : ''
-  };
+  RxList<Notes> listOfNotes = RxList.empty();
 
-  void addTask(){
-    tasksList.add(taskName.text);
-    taskName.clear();
+  void addTask(String task) {
+    Notes note = Notes(title: task, notes: "");
+    listOfNotes.add(note);
+    // tasksList.add(task);
   }
 
-  void deleteTask(String value){
-    tasksList.remove(value);
+  void deleteTask(int index) {
+    listOfNotes.removeAt(index);
   }
 
-  void editTask(int index){
-    if (index >= 0 && index < tasksList.length) {
-      tasksList[index] = taskName.text;
-    }else{
+  void editTask(int index, String task) {
+    if (index >= 0 && index < listOfNotes.length) {
+      listOfNotes[index].title = task;
+      listOfNotes.refresh();
+    } else {
       print('error');
     }
-    taskName.clear();
   }
 
-  void addNote(String title, String notes){
-    titleNotes['title']=title;
-    titleNotes['notes']=notes;
-    
-    
-    print(titleNotes);
+  /// Notes Screen
+
+  void addNote(int index, String title, String notes) {
+    if (listOfNotes[index].title == title) {
+      listOfNotes[index].notes = notes;
+    }
   }
 }
